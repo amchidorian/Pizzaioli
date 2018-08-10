@@ -22,6 +22,7 @@ $('#register_membre').submit(function () {
         } else {
             errors(isNull, date)
         }
+        verifUser(datas)
         event.preventDefault();
     }
 );
@@ -75,4 +76,21 @@ function errors(isNull, date) {
         $("#jour_membre").addClass("is-danger");
         $(".error").append("<li>Vous devez avoir plus de 18 ans pour pouvoir vous inscrire.</li>");
     }
+}
+
+function verifUser(datas) {
+    console.log(datas);
+    $.ajax({
+        type: "POST",
+        url: "http://pizza-ioli.bwb/register_user",
+        dataType: "json",
+        data: datas,
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (e) {
+            $("#erreur").text(e.responseText)
+            console.log("error");
+        }
+    });
 }
