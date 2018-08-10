@@ -23,9 +23,9 @@ class RestController extends Controller
     }
 
     /**
-     * @Route("/check_user", name="check_user")
-     * @Method({"POST"})
+     * @Route("/checky_user", name="checky_user")
      * @param Request $datas
+     * @Method({"POST"})
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function check_user(Request $datas)
@@ -33,8 +33,8 @@ class RestController extends Controller
         $email = $datas->request->get('mail');
         $repository = $this->getDoctrine()->getRepository(User::class);
         $user = $repository->findOneBy(['email' => $email]);
-        if ($user !== null):
-            register_user(datas)
+        if ($user == null):
+            return $this->json($this->register_user($datas), 200);
         else:
             return $this->json(array('mail' => false), 200);
         endif;
@@ -47,11 +47,12 @@ class RestController extends Controller
      */
     public function register_user($datas)
     {
+        dump($datas);
         $em = $this->getDoctrine()->getManager();
         if ($datas->request->get('role') == 'membre'):
-            return $this->json($this->register_membre($datas, $em), 200);
-        else:
-            return $this->json($this->register_pizzeria($datas, $em), 200);
+            return array('register' => $this->register_membre($datas, $em));
+//        else:
+//            return $this->json($this->register_pizzeria($datas, $em), 200);
         endif;
 
     }
@@ -63,6 +64,7 @@ class RestController extends Controller
      */
     protected function register_membre(Request $datas, $em)
     {
+        dump($datas);
         $user = new User();
         $membre = new Membre();
         $user->setAdresse($datas->request->get('adresse'))
@@ -79,40 +81,40 @@ class RestController extends Controller
             ->setPrenom($datas->request->get('prenom'))
             ->setAge($datas->request->get('age'))
             ->setSexe($datas->request->get('sexe'))
-            ->setGeolocalosation($datas->request->get('geo'));
+            ->setGeolocalisation($datas->request->get('geo'));
         $em->persist($user);
         $em->persist($membre);
         $em->flush();
-        return array('register' => true);
+        return true;
     }
-
-    /**
-     * @param $datas
-     * @param ObjectManager $em
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    protected function register_pizzeria($datas, $em)
-    {
-        $user = new User();
-        $pizzeria = new Pizzeria();
-        $user->setAdresse($datas->request->get('adresse'))
-            ->setCodePostal($datas->request->get('code_postal'))
-            ->setRole($datas->request->get('role'))
-            ->setVille($datas->request->get('ville'))
-            ->setEmail($datas->request->get('email'))
-            ->setPassword($datas->request->get('password'))
-            ->setNewsletter($datas->request->get('newsletter'));
-        $hash = $this->encoder->encodePassword($user, $user->getPassword());
-        $user->setPassword($hash);
-        $pizzeria->setUser($user)
-            ->setNom($datas->request->get('nom'))
-            ->setDescription($datas->request->get('description'))
-            ->setNbDeFour($datas->request->get('nb_de_four'));
-        $em->persist($user);
-        $em->persist($pizzeria);
-        $em->flush();
-        return array('register' => true);
-    }
+//
+//    /**
+//     * @param $datas
+//     * @param ObjectManager $em
+//     * @return \Symfony\Component\HttpFoundation\JsonResponse
+//     */
+//    protected function register_pizzeria($datas, $em)
+//    {
+//        $user = new User();
+//        $pizzeria = new Pizzeria();
+//        $user->setAdresse($datas->request->get('adresse'))
+//            ->setCodePostal($datas->request->get('code_postal'))
+//            ->setRole($datas->request->get('role'))
+//            ->setVille($datas->request->get('ville'))
+//            ->setEmail($datas->request->get('email'))
+//            ->setPassword($datas->request->get('password'))
+//            ->setNewsletter($datas->request->get('newsletter'));
+//        $hash = $this->encoder->encodePassword($user, $user->getPassword());
+//        $user->setPassword($hash);
+//        $pizzeria->setIdUser($user)
+//            ->setNom($datas->request->get('nom'))
+//            ->setDescription($datas->request->get('description'))
+//            ->setNbDeFour($datas->request->get('nb_de_four'));
+//        $em->persist($user);
+//        $em->persist($pizzeria);
+//        $em->flush();
+//        return array('register' => true);
+//    }
 
 //    /**
 //     * @Route("/verify_user", name="verify_user")

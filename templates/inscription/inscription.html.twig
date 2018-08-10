@@ -21,7 +21,7 @@
                             <li class="btn_pizzeria"><a>Pizzeria</a></li>
                         </ul>
                     </div>
-                    <div class="error-display" style="display: none">
+                    <div id="erreur" class="error-display" style="display: none">
                         <ul class="error">
                         </ul>
                     </div>
@@ -98,10 +98,10 @@
                                         <div class="control is-expanded">
                                             <div id="sexe_membre" onclick='removeClasse("sexe_membre")'
                                                  class="select is-fullwidth">
-                                                <select>
+                                                <select id="sexe">
                                                     <option value=""></option>
-                                                    <option>Femme</option>
-                                                    <option>Homme</option>
+                                                    <option value="femme">Femme</option>
+                                                    <option value="homme">Homme</option>
                                                 </select>
                                             </div>
                                         </div>

@@ -74,6 +74,7 @@
 /***/ (function(module, exports) {
 
 $('#register_membre').submit(function () {
+    event.preventDefault();
     $(".error").empty();
     var date = getTimestampAge();
     var datas = {
@@ -88,16 +89,16 @@ $('#register_membre').submit(function () {
         "prenom": $("#prenom_membre").val(),
         "age": date,
         "geo": $("#geo_membre").is(':checked'),
-        "sexe": $("#sexe_membre").val()
+        "sexe": $('#sexe_membre option:selected').val()
     };
     console.log(datas);
     var isNull = checkData(datas);
+    console.log(isNull);
     if (isNull.length == 0 && !ageRestrict(date)) {
-        register_user(datas);
+        verifUser(datas);
     } else {
         errors(isNull, date);
     }
-    event.preventDefault();
 });
 
 function getTimestampAge() {
@@ -111,7 +112,7 @@ function getTimestampAge() {
 }
 
 function ageRestrict(date) {
-    var restrictTimestamp = Math.floor(Date.now() / 1000) - 1281218400;
+    var restrictTimestamp = Math.floor(Date.now() / 1000 - 567993600);
     if (date < restrictTimestamp) {
         return false;
     } else {
@@ -122,7 +123,7 @@ function ageRestrict(date) {
 function checkData(datas) {
     var champNull = [];
     for (var data in datas) {
-        if (datas[data] == "") {
+        if (datas[data] == "" && data != "geo" && data != "newsletter") {
             champNull.push(data);
         }
     }
@@ -147,6 +148,23 @@ function errors(isNull, date) {
         $("#jour_membre").addClass("is-danger");
         $(".error").append("<li>Vous devez avoir plus de 18 ans pour pouvoir vous inscrire.</li>");
     }
+}
+
+function verifUser(datas) {
+    console.log(datas);
+    $.ajax({
+        type: "POST",
+        url: "http://pizza-ioli.bwb/checky_user",
+        dataType: "json",
+        data: datas,
+        success: function success(data) {
+            console.log(data);
+        },
+        error: function error(e) {
+            $("#erreur").text(e.responseText);
+            console.log("error");
+        }
+    });
 }
 
 /***/ })

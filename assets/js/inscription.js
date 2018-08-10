@@ -1,4 +1,5 @@
 $('#register_membre').submit(function () {
+        event.preventDefault();
         $(".error").empty();
         var date = getTimestampAge()
         var datas = {
@@ -13,17 +14,16 @@ $('#register_membre').submit(function () {
             "prenom": $("#prenom_membre").val(),
             "age": date,
             "geo": $("#geo_membre").is(':checked'),
-            "sexe": $("#sexe_membre").val()
+            "sexe": $('#sexe_membre option:selected').val()
         };
         console.log(datas);
         var isNull = checkData(datas);
+        console.log(isNull)
         if (isNull.length == 0 && !ageRestrict(date)) {
-            register_user(datas);
+            verifUser(datas)
         } else {
             errors(isNull, date)
         }
-        verifUser(datas)
-        event.preventDefault();
     }
 );
 
@@ -40,7 +40,7 @@ function getTimestampAge() {
 }
 
 function ageRestrict(date) {
-    var restrictTimestamp = Math.floor(Date.now() / 1000) - 1281218400;
+    var restrictTimestamp = Math.floor(Date.now() / 1000 - 567993600);
     if (date < restrictTimestamp) {
         return false;
     } else {
@@ -51,7 +51,7 @@ function ageRestrict(date) {
 function checkData(datas) {
     var champNull = [];
     for (var data in datas) {
-        if (datas[data] == "") {
+        if (datas[data] == "" && data != "geo" && data != "newsletter") {
             champNull.push(data)
         }
     }
@@ -82,7 +82,7 @@ function verifUser(datas) {
     console.log(datas);
     $.ajax({
         type: "POST",
-        url: "http://pizza-ioli.bwb/register_user",
+        url: "http://pizza-ioli.bwb/checky_user",
         dataType: "json",
         data: datas,
         success: function (data) {
