@@ -1,0 +1,173 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{{ asset('build/css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/inscription.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="hero is-info is-fullheight">
+
+        {% include 'navbar.html.twig' %}
+
+        <div class="hero-body">
+            <div class="column is-6 is-offset-3">
+                <h3 class="title has-text-grey">Se Connecter</h3>
+                <div class="box">
+                    <div class="tabs is-centered">
+                        <ul id="tabs-register">
+                            <li class="btn_membre"><a>Membre</a></li>
+                            <li class="btn_pizzeria"><a>Pizzeria</a></li>
+                        </ul>
+                    </div>
+                    <div class="error-display" style="display: none">
+                        <ul class="error">
+                        </ul>
+                    </div>
+                    <div class="membre">
+                        <form id="register_membre">
+                            <p class="info_membre">Informations Personelle :</p>
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <label class="label">Nom :</label>
+                                        <p class="control is-expanded has-icons-left">
+                                            <input id="nom_membre" onclick='removeClasse("nom_membre")' class="input"
+                                                   type="text" placeholder="ex : Papa">
+                                            <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                                        </p>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label">Prénom :</label>
+                                        <p class="control is-expanded has-icons-left">
+                                            <input id="prenom_membre" onclick='removeClasse("prenom_membre")'
+                                                   class="input" type="text" placeholder="ex : John">
+                                            <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Email :</label>
+                                <p class="control is-expanded has-icons-left">
+                                    <input id="mail_membre" onclick='removeClasse("mail_membre")' class="input"
+                                           type="text"
+                                           placeholder="ex : papa.john@bwb.com">
+                                    <span class="icon is-small is-left"><i class="fa fa-envelope"></i></span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="label">Mot de Passe :</label>
+                                <p class="control is-expanded has-icons-left">
+                                    <input id="pass_membre" class="input" onclick='removeClasse("pass_membre")'
+                                           type="password" placeholder=" **********">
+                                    <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                                </p>
+                            </div>
+                            <div class="columns">
+                                <div class="column is-half">
+                                    <label class="label">Date de Naissance : </label>
+                                    <div class="field is-horizontal">
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <p class="control is-expanded">
+                                                    <input id="jour_membre" onclick='removeClasse("jour_membre")'
+                                                           class="input" type="text" placeholder="JJ">
+                                                </p>
+                                            </div>
+                                            <div class="field">
+                                                <p class="control is-expanded">
+                                                    <input id="mois_membre" onclick='removeClasse("mois_membre")'
+                                                           class="input" type="text" placeholder="MM">
+                                                </p>
+                                            </div>
+                                            <div class="field">
+                                                <p class="control is-expanded">
+                                                    <input id="an_membre" class="input"
+                                                           onclick='removeClasse("an_membre")' type="text"
+                                                           placeholder="AAAA">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-half">
+                                    <label class="label">Sexe :</label>
+                                    <div class="field has-addons">
+                                        <div class="control is-expanded">
+                                            <div id="sexe_membre" onclick='removeClasse("sexe_membre")'
+                                                 class="select is-fullwidth">
+                                                <select>
+                                                    <option value=""></option>
+                                                    <option>Femme</option>
+                                                    <option>Homme</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Adresse :</label>
+                                <p class="control is-expanded has-icons-left">
+                                    <input id="adresse_membre" onclick='removeClasse("adresse_membre")' class="input"
+                                           type="text"
+                                           placeholder="ex : 42 Rue de la Pizza">
+                                    <span class="icon is-small is-left"><i class="fa fa-home"></i></span>
+                                </p>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <label class="label">Code Postal</label>
+                                        <p class="control is-expanded has-icons-left">
+                                            <input id="code_postal_membre" onclick='removeClasse("code_postal_membre")'
+                                                   class="input" type="text"
+                                                   placeholder="ex : 34400">
+                                            <span class="icon is-small is-left"><i class="fa fa-home"></i></span>
+                                        </p>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label">Ville</label>
+                                        <p class="control is-expanded has-icons-left">
+                                            <input id="ville_membre" class="input"
+                                                   onclick='removeClasse("ville_membre")' type="text"
+                                                   placeholder="ex : Lunel">
+                                            <span class="icon is-small is-left"><i class="fa fa-home"></i></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input id="news_membre" type="checkbox">
+                                    Recevoir les newsletter.
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input id="geo_membre" type="checkbox">
+                                    Accepter la géolocalisation.
+                                </label>
+                            </div>
+                            <div class="control">
+                                <button class="button is-link">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="erreur"></div>
+    </section>
+{% endblock %}
+{% block javascripts %}
+    <script rel="stylesheet" src="{{ asset('build/js/inscription.js') }}"></script>
+    <script>
+        function removeClasse(name) {
+            $("#" + name).removeClass("is-danger");
+        }
+    </script>
+{% endblock %}

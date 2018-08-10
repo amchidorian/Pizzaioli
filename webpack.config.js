@@ -9,9 +9,9 @@ Encore
     .setPublicPath('/build')
 
     // will create public/build/app.js and public/build/app.css
-    .addStyleEntry('css/home', './assets/css/home.css')
+  /*  .addStyleEntry('css/home', './assets/css/home.css')
     .addStyleEntry('css/inscription', './assets/css/inscription.css')
-    .addEntry('js/connexion', './assets/js/connexion.js')
+    .addEntry('js/connexion', './assets/js/connexion.js')*/
     .addEntry('js/inscription', './assets/js/inscription.js')
 
     // allow legacy applications to use $/jQuery as a global variable
