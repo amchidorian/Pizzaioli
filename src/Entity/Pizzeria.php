@@ -11,16 +11,9 @@ class Pizzeria
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
      */
-    private $id;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="pizzeria", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $id_user;
+    private $user;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -33,11 +26,6 @@ class Pizzeria
     private $description;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    private $note;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $four;
@@ -47,19 +35,19 @@ class Pizzeria
      */
     private $statut;
 
-    public function getId()
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $note;
+
+    public function getUser(): ?User
     {
-        return $this->id;
+        return $this->user;
     }
 
-    public function getIdUser(): ?User
+    public function setUser(User $user): self
     {
-        return $this->id_user;
-    }
-
-    public function setIdUser(User $id_user): self
-    {
-        $this->id_user = $id_user;
+        $this->user = $user;
 
         return $this;
     }
@@ -88,18 +76,6 @@ class Pizzeria
         return $this;
     }
 
-    public function getNote(): ?float
-    {
-        return $this->note;
-    }
-
-    public function setNote(float $note): self
-    {
-        $this->note = $note;
-
-        return $this;
-    }
-
     public function getFour(): ?int
     {
         return $this->four;
@@ -120,6 +96,18 @@ class Pizzeria
     public function setStatut(bool $statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getNote(): ?float
+    {
+        return $this->note;
+    }
+
+    public function setNote(?float $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }

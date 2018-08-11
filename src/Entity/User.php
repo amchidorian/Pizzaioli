@@ -53,11 +53,6 @@ class User implements UserInterface
     private $role;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Pizzeria", mappedBy="id_user", cascade={"persist", "remove"})
-     */
-    private $pizzeria;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $num;
