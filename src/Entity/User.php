@@ -57,6 +57,11 @@ class User implements UserInterface
      */
     private $pizzeria;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $num;
+
     public function getId()
     {
         return $this->id;
@@ -215,5 +220,17 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getNum(): ?int
+    {
+        return $this->num;
+    }
+
+    public function setNum(int $num): self
+    {
+        $this->num = $num;
+
+        return $this;
     }
 }

@@ -42,6 +42,11 @@ class Pizzeria
      */
     private $four;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    private $statut;
+
     public function getId()
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Pizzeria
     public function setFour(int $four): self
     {
         $this->four = $four;
+
+        return $this;
+    }
+
+    public function getStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(bool $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }
