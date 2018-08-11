@@ -26,6 +26,7 @@ $('#register_membre').submit(function () {
             "newsletter": $("#news_membre").is(':checked'),
             "nom": $("#nom_membre").val(),
             "prenom": $("#prenom_membre").val(),
+            "num": $("#num_membre").val(),
             "age": date,
             "geo": $("#geo_membre").is(':checked'),
             "sexe": $('#sexe_membre option:selected').val()
@@ -108,7 +109,7 @@ function getTimestampAge() {
 
 function ageRestrict(date) {
     var restrictTimestamp = Math.floor(Date.now() / 1000 - 567993600);
-    if (date < restrictTimestamp) {
+    if (date > restrictTimestamp) {
         return true;
     } else {
         return false;

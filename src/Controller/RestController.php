@@ -100,16 +100,17 @@ class RestController extends Controller
             ->setCodePostal($datas->request->get('code_postal'))
             ->setRole($datas->request->get('role'))
             ->setVille($datas->request->get('ville'))
-            ->setEmail($datas->request->get('email'))
-            ->setPassword($datas->request->get('password'))
+            ->setEmail($datas->request->get('mail'))
+            ->setPassword($datas->request->get('pass'))
             ->setNewsletter($datas->request->get('newsletter'))
             ->setNum($datas->request->get('num'));
         $hash = $this->encoder->encodePassword($user, $user->getPassword());
         $user->setPassword($hash);
-        $pizzeria->setIdUser($user)
+        $pizzeria->setUser($user)
+            ->setStatut(false)
             ->setNom($datas->request->get('nom'))
             ->setDescription($datas->request->get('description'))
-            ->setNbDeFour($datas->request->get('four'));
+            ->setFour($datas->request->get('four'));
         $em->persist($user);
         $em->persist($pizzeria);
         $em->flush();
