@@ -53,9 +53,9 @@ class User implements UserInterface
     private $role;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Pizzeria", mappedBy="id_user", cascade={"persist", "remove"})
+     * @ORM\Column(type="integer")
      */
-    private $pizzeria;
+    private $num;
 
     public function getId()
     {
@@ -215,5 +215,17 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getNum(): ?int
+    {
+        return $this->num;
+    }
+
+    public function setNum(int $num): self
+    {
+        $this->num = $num;
+
+        return $this;
     }
 }
