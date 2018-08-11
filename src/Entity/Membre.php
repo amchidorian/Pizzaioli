@@ -11,15 +11,9 @@ class Membre
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
      */
-    private $id_user;
+    private $user;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -46,19 +40,15 @@ class Membre
      */
     private $sexe;
 
-    public function getId()
+
+    public function getUser(): ?User
     {
-        return $this->id;
+        return $this->user;
     }
 
-    public function getIdUser(): ?User
+    public function setUser(?User $user): self
     {
-        return $this->id_user;
-    }
-
-    public function setIdUser(?User $id_user): self
-    {
-        $this->id_user = $id_user;
+        $this->user = $user;
 
         return $this;
     }
