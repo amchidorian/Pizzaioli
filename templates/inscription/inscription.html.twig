@@ -15,25 +15,44 @@
             <div class="column is-6 is-offset-3">
                 <h3 class="title has-text-grey">Se Connecter</h3>
                 <div class="box">
-                    <div class="tabs is-centered">
-                        <ul id="tabs-register">
-                            <li class="btn_membre"><a>Membre</a></li>
-                            <li class="btn_pizzeria"><a>Pizzeria</a></li>
-                        </ul>
+                    <div class="columns">
+                        <div class="column is-half hvr-underline-from-right">
+
+                            <a>
+                                <div class="tab_membre tabs is-centered is-medium" style="border-right: #222222">
+                                    <ul>
+                                        <li class="btn_membre is-active">Membre</li>
+                                    </ul>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="column" style="padding: 1px; width: 10px; background-color: #cabfbf;"></div>
+
+                        <div class="column is-half hvr-underline-from-left">
+                            <a>
+                                <div class="tab_pizzeria tabs is-centered is-medium">
+                                    <ul>
+                                        <li class="btn_pizzeria is-fullwidth">Pizzeria</li>
+                                    </ul>
+                                </div>
+                            </a>
+                        </div>
+
                     </div>
-                    <div class="error-display" style="display: none">
+                    <div id="erreur" class="error-display" style="display: none">
                         <ul class="error">
                         </ul>
                     </div>
-                    <div class="membre">
+                    <div class="membre" style="display: none">
                         <form id="register_membre">
-                            <p class="info_membre">Informations Personelle :</p>
                             <div class="field is-horizontal">
                                 <div class="field-body">
                                     <div class="field">
                                         <label class="label">Nom :</label>
                                         <p class="control is-expanded has-icons-left">
-                                            <input id="nom_membre" onclick='removeClasse("nom_membre")' class="input"
+                                            <input id="nom_membre" onclick='removeClasse("nom_membre")'
+                                                   class="input"
                                                    type="text" placeholder="ex : Papa">
                                             <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
                                         </p>
@@ -63,6 +82,15 @@
                                     <input id="pass_membre" class="input" onclick='removeClasse("pass_membre")'
                                            type="password" placeholder=" **********">
                                     <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="label">Numéro de Téléphone :</label>
+                                <p class="control is-expanded has-icons-left">
+                                    <input id="num_membre" onclick='removeClasse("num_membre")' class="input"
+                                           type="text"
+                                           placeholder="ex : 0123456789">
+                                    <span class="icon is-small is-left"><i class="fa fa-phone"></i></span>
                                 </p>
                             </div>
                             <div class="columns">
@@ -98,10 +126,10 @@
                                         <div class="control is-expanded">
                                             <div id="sexe_membre" onclick='removeClasse("sexe_membre")'
                                                  class="select is-fullwidth">
-                                                <select>
+                                                <select id="sexe">
                                                     <option value=""></option>
-                                                    <option>Femme</option>
-                                                    <option>Homme</option>
+                                                    <option value="femme">Femme</option>
+                                                    <option value="homme">Homme</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -111,7 +139,8 @@
                             <div class="field">
                                 <label class="label">Adresse :</label>
                                 <p class="control is-expanded has-icons-left">
-                                    <input id="adresse_membre" onclick='removeClasse("adresse_membre")' class="input"
+                                    <input id="adresse_membre" onclick='removeClasse("adresse_membre")'
+                                           class="input"
                                            type="text"
                                            placeholder="ex : 42 Rue de la Pizza">
                                     <span class="icon is-small is-left"><i class="fa fa-home"></i></span>
@@ -122,7 +151,8 @@
                                     <div class="field">
                                         <label class="label">Code Postal</label>
                                         <p class="control is-expanded has-icons-left">
-                                            <input id="code_postal_membre" onclick='removeClasse("code_postal_membre")'
+                                            <input id="code_postal_membre"
+                                                   onclick='removeClasse("code_postal_membre")'
                                                    class="input" type="text"
                                                    placeholder="ex : 34400">
                                             <span class="icon is-small is-left"><i class="fa fa-home"></i></span>
@@ -139,7 +169,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="field">
                                 <label class="checkbox">
                                     <input id="news_membre" type="checkbox">
@@ -157,10 +186,110 @@
                             </div>
                         </form>
                     </div>
+                    <div class="pizzeria is-centered" style="display: none">
+                        <form id="register_pizzeria">
+                            <div class="field">
+                                <label class="label">Email :</label>
+                                <p class="control is-expanded has-icons-left">
+                                    <input id="mail_pizzeria" onclick='removeClasse("mail_pizzeria")'
+                                           class="input is-fullwidth"
+                                           type="text"
+                                           placeholder="ex : papa.john@bwb.com">
+                                    <span class="icon is-small is-left"><i class="fa fa-envelope"></i></span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="label">Mot de Passe :</label>
+                                <p class="control is-expanded has-icons-left">
+                                    <input id="pass_pizzeria" class="input" onclick='removeClasse("pass_pizzeria")'
+                                           type="password" placeholder=" **********">
+                                    <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="label">Nom de la Pizzeria :</label>
+                                <p class="control is-expanded has-icons-left">
+                                    <input id="nom_pizzeria" class="input" onclick='removeClasse("nom_pizzeria")'
+                                           type="text" placeholder="ex : Pizza Papa">
+                                    <span class="icon is-small is-left"><i class="fas fa-store-alt"></i></span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="label">Description de la Pizzeria :</label>
+                                <p class="control is-expanded">
+                                    <textarea id="description_pizzeria" onclick='removeClasse("description_pizzeria")'
+                                              class="textarea" placeholder="Description de la Pizzeria"></textarea>
+                                </p>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <label class="label">Nombre de four :</label>
+                                        <p class="control is-expanded has-icons-left">
+                                            <input id="four_pizzeria" onclick='removeClasse("nombre_pizzeria")'
+                                                   class="input"
+                                                   type="text" placeholder="ex : 1">
+                                            <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                                        </p>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label">Numéro de Téléphone :</label>
+                                        <p class="control is-expanded has-icons-left">
+                                            <input id="num_pizzeria" onclick='removeClasse("num_membre")'
+                                                   class="input" type="text" placeholder="ex : 0123456789">
+                                            <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Adresse :</label>
+                                <p class="control is-expanded has-icons-left">
+                                    <input id="adresse_pizzeria" onclick='removeClasse("adresse_pizzeria")'
+                                           class="input"
+                                           type="text"
+                                           placeholder="ex : 42 Rue de la Pizza">
+                                    <span class="icon is-small is-left"><i class="fa fa-home"></i></span>
+                                </p>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <label class="label">Code Postal</label>
+                                        <p class="control is-expanded has-icons-left">
+                                            <input id="code_postal_pizzeria"
+                                                   onclick='removeClasse("code_postal_pizzeria")'
+                                                   class="input" type="text"
+                                                   placeholder="ex : 34400">
+                                            <span class="icon is-small is-left"><i class="fa fa-home"></i></span>
+                                        </p>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label">Ville</label>
+                                        <p class="control is-expanded has-icons-left">
+                                            <input id="ville_pizzeria" class="input"
+                                                   onclick='removeClasse("ville_pizzeria")' type="text"
+                                                   placeholder="ex : Lunel">
+                                            <span class="icon is-small is-left"><i class="fa fa-home"></i></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input id="news_pizzeria" type="checkbox">
+                                    Recevoir les newsletter.
+                                </label>
+                            </div>
+                            <div class="control">
+                                <button class="button is-link">Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+            <div id="erreur"></div>
         </div>
-        <div id="erreur"></div>
     </section>
 {% endblock %}
 {% block javascripts %}
